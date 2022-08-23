@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -9,11 +10,24 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class FormComponent implements OnInit {
   
   myForm!: FormGroup;
+  textToCount!: Array<string>;
 
-  
+  async onSubmit(form: FormGroup) {
 
-  onSubmit(form: FormGroup) {
-    console.log(form.value.text); 
+    this.textToCount = [form.value.text]; 
+    // characters with whitespaces
+    const nbCharactersWithSpace: number = this.textToCount[0].length;
+
+    // characters without whitespaces
+    const nbCharactersWithoutSpace: number = this.textToCount[0].replace(/\s/g, "").length;
+
+    // words
+    const words: number = this.textToCount[0].split(' ').length;
+    console.log(this.textToCount);
+    console.log(words);
+    console.log(nbCharactersWithoutSpace);
+    console.log(nbCharactersWithSpace);
+
     
   };
   
@@ -25,4 +39,6 @@ export class FormComponent implements OnInit {
     
   }
 
-}
+  
+
+};
