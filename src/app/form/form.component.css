@@ -1,0 +1,13 @@
+.form--container {
+    display: flex;
+    flex-direction: column;
+    width: 50em;
+}
+
+textarea {
+    height: 30em;
+}
+
+.form--button {
+    width: 10em;
+}
