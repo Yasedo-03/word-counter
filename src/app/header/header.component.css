@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "TitanOne";
+    src: url(../../assets/fonts/TitanOne-Regular.ttf);
+}
+
+
+h1 {
+    font-family: "TitanOne", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    padding-bottom: 1em;
+    color: #3f51b5;
+}

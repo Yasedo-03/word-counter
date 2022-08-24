@@ -10,4 +10,17 @@ textarea {
 
 .form--button {
     width: 10em;
+    margin-bottom: 2em;
+}
+
+.counter {
+    color: white;
+    background-color: rgb(107, 216, 23);
+    padding: 1em;
+    margin-right: 1em;
+    border-radius: 2em;
+}
+
+form p {
+    margin-bottom: 2em;
 }
