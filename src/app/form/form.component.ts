@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.myForm = new FormGroup({
-      text: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      text: new FormControl('', [Validators.required]),
     });
     
   }
