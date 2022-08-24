@@ -5,5 +5,18 @@
         <textarea matInput formControlName="text"></textarea>
     </mat-form-field>
     <button type="submit" class="form--button" mat-flat-button color="primary">Comptez!</button>
+    <p [style.display]="isVisible ? 'block' : 'none'">
+        <span class="counter">{{ nbWords }}</span>
+        Mots
+    </p>
+    <p [style.display]="isVisible ? 'block' : 'none'">
+        <span class="counter">{{ characterWithoutSpace }}</span>
+        Caractères sans espaces
+    </p>
+    <p [style.display]="isVisible ? 'block' : 'none'">
+        <span class="counter">{{ characterWithSpace }}</span>
+        Caractères avec espaces
+    </p>
+    
 </form>
 
