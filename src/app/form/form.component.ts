@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-
+import { Store } from '@ngrx/store';
+import { countWords } from 'src/store/actions/word-count.actions';
+import { selectCharactersWithSpace, selectCharactersWithoutSpace, selectWords } from 'src/store/selectors/word-count.selectors';
+import { AppState } from 'src/store/state/app.state';
 
 @Component({
   selector: 'app-form',
@@ -10,56 +13,26 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class FormComponent implements OnInit {
   
   myForm!: FormGroup;
-  textToCount!: Array<string>;
   nbWords!: string;
   characterWithSpace!: string;
   characterWithoutSpace!: string;
   isVisible: boolean = false;
-  
+
+  constructor(private store: Store<AppState>) {}
 
   onSubmit(form: FormGroup) {
+    this.store.dispatch(countWords({ text: form.value.text }));
 
-    this.textToCount = [form.value.text]; 
-    // characters with whitespaces
-    const nbCharactersWithSpace: number = this.textToCount[0].length;
-
-    // characters without whitespaces
-    const nbCharactersWithoutSpace: number = this.textToCount[0].replace(/\s/g, "").length;
-
-    // words
-    const words: number = this.textToCount[0].split(' ').length;
-
-    // Storage
-    localStorage.setItem('words', words.toString());
-    localStorage.setItem('characterWithSpace', nbCharactersWithSpace.toString());
-    localStorage.setItem('characterWithoutSpace', nbCharactersWithoutSpace.toString());
-
-    this.nbWords = localStorage.getItem('words')!;
-    this.characterWithSpace = localStorage.getItem('characterWithSpace')!;
-    this.characterWithoutSpace = localStorage.getItem('characterWithoutSpace')!;
-
-    localStorage.clear();
-
-    // display results
     this.isVisible = true;
-
-    // log
-    console.log(this.textToCount);
-    console.log(words);
-    console.log(nbCharactersWithoutSpace);
-    console.log(nbCharactersWithSpace);
-
-    
-  };
-  
+  }
 
   ngOnInit(): void {
     this.myForm = new FormGroup({
       text: new FormControl('', [Validators.required]),
     });
-    
+
+    this.store.select(selectWords).subscribe(words => this.nbWords = words.toString());
+    this.store.select(selectCharactersWithSpace).subscribe(characters => this.characterWithSpace = characters.toString());
+    this.store.select(selectCharactersWithoutSpace).subscribe(characters => this.characterWithoutSpace = characters.toString());
   }
-
-  
-
-};
+}

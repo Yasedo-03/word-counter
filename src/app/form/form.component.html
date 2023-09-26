@@ -3,8 +3,11 @@
     <mat-form-field  appearance="fill">
         <mat-label>Écrivez votre texte içi ...</mat-label> 
         <textarea matInput formControlName="text"></textarea>
+        <mat-error *ngIf="myForm.controls['text'].invalid && myForm.controls['text'].touched">
+            Ce champ est requis
+        </mat-error>
     </mat-form-field>
-    <button type="submit" class="form--button" mat-flat-button color="primary">Comptez!</button>
+    <button type="submit" class="form--button" mat-flat-button color="primary" [disabled]="myForm.invalid">Comptez!</button>
     <p [style.display]="isVisible ? 'block' : 'none'">
         <span class="counter">{{ nbWords }}</span>
         Mots

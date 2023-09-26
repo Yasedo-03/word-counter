@@ -10,6 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { HeaderComponent } from './header/header.component';
+import { StoreModule } from '@ngrx/store';
+import { wordCountReducer } from 'src/store/reducers/word-count.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,10 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
+    StoreModule.forRoot({ wordCount: wordCountReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
